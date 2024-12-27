@@ -1,0 +1,11 @@
+{
+  "version": "1.0",
+  "apis": [
+    {
+      "identifier": "api-codegpt",
+      "source": "@api-codegpt/v3.0#glkgm0y0whte",
+      "integrity": "sha512-PGa2+f0c6R4qoHorhkB89tx2sipMm4jekxmgllJOQn345ZDzMgGNoX+h/AcqnBJb7hbE6SDDCHFFBUeDMpeMOg==",
+      "installerVersion": "6.1.2"
+    }
+  ]
+}

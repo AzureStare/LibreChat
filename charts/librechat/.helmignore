@@ -1,0 +1,95 @@
+# Dependencies
+node_modules/
+bower_components/
+.pnpm-store/
+
+# Build outputs
+build/
+dist/
+public/main.js
+public/main.js.map
+public/main.js.LICENSE.txt
+client/public/images/
+client/public/main.js
+client/public/main.js.map
+client/public/main.js.LICENSE.txt
+packages/data-provider/dist/
+packages/data-provider/test_bundle/
+
+# Environment and secrets
+.env*
+!.env.example
+!.env.test.example
+my.secrets
+.npmrc
+cache.json
+owner.yml
+monospace.json
+*.pem
+config.local.ts
+
+# Logs and debugging
+logs/
+*.log
+data-node/
+meili_data*/
+data/
+coverage/
+junit.xml
+/e2e/specs/.test-results/
+/e2e/playwright-report/
+/playwright/.cache/
+**/storageState.json
+
+# IDE and editor files
+.vscode/
+.idea/
+*.code-workspace
+.idx
+*.iml
+*.swp
+*.swo
+*.swn
+*.bak
+*.tmp
+*.orig
+*~
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Docker
+docker-compose.override.yaml
+docker-compose.override.yml
+librechat.yaml
+librechat.yml
+
+# TypeScript
+*.d.ts
+!vite-env.d.ts
+
+# Translation files
+config/translations/stores/*
+client/src/localization/languages/*_missing_keys.json
+
+# Meilisearch
+meilisearch
+meilisearch.exe
+data.ms/*
+auth.json
+
+# User uploads
+uploads/
+
+# Misc
+.floo
+.floobit
+.flooignore
+archive/
+release/
+/packages/ux-shared/
+/images
+
+# Preserve specific directories
+!client/src/components/Nav/SettingsTabs/Data/

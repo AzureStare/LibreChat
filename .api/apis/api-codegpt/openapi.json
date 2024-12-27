@@ -1,0 +1,1323 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "API CODEGPT V2",
+    "version": "3.0"
+  },
+  "servers": [
+    {
+      "url": "https://api.codegpt.co/api/v1/"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "sec0": {
+        "type": "oauth2",
+        "flows": {}
+      }
+    }
+  },
+  "security": [
+    {
+      "sec0": []
+    }
+  ],
+  "paths": {
+    "/agent/{id}": {
+      "get": {
+        "summary": "Get Agent",
+        "description": "",
+        "operationId": "get-agent-beta",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Agent ID",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          },
+          {
+            "name": "populate",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "agent_documents"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Result": {
+                    "value": "\"string\""
+                  }
+                },
+                "schema": {
+                  "type": "string",
+                  "example": "string"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "422",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Result": {
+                    "value": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}"
+                  }
+                },
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "detail": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "loc": {
+                            "type": "array",
+                            "items": {
+                              "type": "string",
+                              "example": "string"
+                            }
+                          },
+                          "msg": {
+                            "type": "string",
+                            "example": "string"
+                          },
+                          "type": {
+                            "type": "string",
+                            "example": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false,
+        "x-readme": {
+          "code-samples": [
+            {
+              "language": "text",
+              "code": "{\n  \"status\": \"published\",\n  \"name\": \"Agent 1\",\n  \"documentId\": [],\n  \"description\": \"Description of the agent\",\n  \"prompt\": \"You are a helpful assistant\",\n  \"topk\": 3,\n  \"temperature\": 0.7,\n  \"model\": \"gpt-3.5-turbo\",\n  \"welcome\": \"Hello, how can I help you?\",\n  \"maxTokens\": 1024,\n  \"id\": \"0000-0000-0000-0000\",\n  \"user_created\": \"0000-0000-0000-0000\",\n  \"date_created\": \"2023-01-01T12:00:00.000Z\"\n}"
+            }
+          ],
+          "samples-languages": [
+            "text"
+          ]
+        }
+      },
+      "delete": {
+        "summary": "Delete Agent",
+        "description": "",
+        "operationId": "delete-agent-beta",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id agent",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          },
+          {
+            "name": "CodeGPT-Org-Id",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Result": {
+                    "value": "string"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "400",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Result": {
+                    "value": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        0\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}"
+                  }
+                },
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "detail": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "loc": {
+                            "type": "array"
+                          },
+                          "msg": {
+                            "type": "string",
+                            "example": "string"
+                          },
+                          "type": {
+                            "type": "string",
+                            "example": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "patch": {
+        "summary": "Update Agent",
+        "description": "Update name, prompt and number of tokens",
+        "operationId": "update-agent-beta",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Agent ID",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          },
+          {
+            "name": "CodeGPT-Org-Id",
+            "in": "header",
+            "description": "Organization ID that agents and documents belong to.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "Name of the agent",
+                    "default": "Agent"
+                  },
+                  "prompt": {
+                    "type": "string",
+                    "description": "Prompt of the agent"
+                  },
+                  "welcome": {
+                    "type": "string",
+                    "description": "Welcome message of the agent"
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "Description of the agent"
+                  },
+                  "is_public": {
+                    "type": "boolean",
+                    "description": "Whether the agent can be seen and used by any user or not"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "200",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Result": {
+                    "value": "{\n  \"name\": name,\n  \"model\": model,\n  \"temperature\": tempature,\n  \"prompt\": prompt,\n  \"topk\": topk,\n  \"welcome\": welcomemessage,\n  \"is_public\": bolean,\n  \"pincode\": bolean\n}"
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "422",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Result": {
+                    "value": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}"
+                  }
+                },
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "detail": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "loc": {
+                            "type": "array",
+                            "items": {
+                              "type": "string",
+                              "example": "string"
+                            }
+                          },
+                          "msg": {
+                            "type": "string",
+                            "example": "string"
+                          },
+                          "type": {
+                            "type": "string",
+                            "example": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false,
+        "x-readme": {
+          "code-samples": [
+            {
+              "language": "text",
+              "code": "{\n  \"status\": \"published\",\n  \"name\": \"Agent 1\",\n  \"documentId\": [],\n  \"description\": \"Description of the agent\",\n  \"prompt\": \"You are a helpful assistant\",\n  \"topk\": 3,\n  \"temperature\": 0.7,\n  \"model\": \"gpt-3.5-turbo\",\n  \"welcome\": \"Hello, how can I help you?\",\n  \"maxTokens\": 1024\n}"
+            }
+          ],
+          "samples-languages": [
+            "text"
+          ]
+        }
+      }
+    },
+    "/agent": {
+      "get": {
+        "summary": "List Agents",
+        "description": "",
+        "operationId": "list-agents-beta",
+        "responses": {
+          "200": {
+            "description": "200",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Result": {
+                    "value": "\"string\""
+                  }
+                },
+                "schema": {
+                  "type": "string",
+                  "example": "string"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "401",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Result": {
+                    "value": "{\n  \"detail\": \"Not authenticated\"\n}"
+                  }
+                },
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "detail": {
+                      "type": "string",
+                      "example": "Not authenticated"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "post": {
+        "summary": "Create Agent",
+        "description": "Create un new Agent",
+        "operationId": "create-agent-beta",
+        "parameters": [
+          {
+            "name": "CodeGPT-Org-Id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "name"
+                ],
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "Name of the agent"
+                  },
+                  "topk": {
+                    "type": "string"
+                  },
+                  "temperature": {
+                    "type": "number",
+                    "format": "float"
+                  },
+                  "welcome": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "200",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Result": {
+                    "value": "{\n  \"name\":name ,\n  \"prompt\":prompt ,\n  \"topk\":topk \n}"
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "422",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Result": {
+                    "value": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}"
+                  }
+                },
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "detail": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "loc": {
+                            "type": "array",
+                            "items": {
+                              "type": "string",
+                              "example": "string"
+                            }
+                          },
+                          "msg": {
+                            "type": "string",
+                            "example": "string"
+                          },
+                          "type": {
+                            "type": "string",
+                            "example": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/chat/completions": {
+      "post": {
+        "summary": "Completion",
+        "description": "",
+        "operationId": "completion-beta",
+        "parameters": [
+          {
+            "name": "CodeGPT-Org-Id",
+            "in": "header",
+            "description": "Organization ID that agents and documents belong to.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "agentId"
+                ],
+                "properties": {
+                  "agentId": {
+                    "type": "string",
+                    "description": "agentId"
+                  },
+                  "messages": {
+                    "type": "string",
+                    "format": "json"
+                  },
+                  "format": {
+                    "type": "string",
+                    "description": "\"text\" or \"json\"(Default)",
+                    "default": "\"json\""
+                  },
+                  "stream": {
+                    "type": "boolean",
+                    "description": "false or true(Default)",
+                    "default": false
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "200",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Result": {
+                    "value": "\"string\""
+                  }
+                },
+                "schema": {
+                  "type": "string",
+                  "example": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "400",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "HTTPValidationError": {
+                    "value": "{\ndetail\tDetail[\ntitle: Detail\nValidationError{\nloc*\tLocation[\ntitle: Location\nstring]\nmsg*\tstring\ntitle: Message\ntype*\tstring\ntitle: Error Type\n \n}]\n \n}"
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "422",
+            "content": {
+              "text/plain": {
+                "examples": {
+                  "Result": {
+                    "value": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        0\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}"
+                  }
+                },
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "detail": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "loc": {
+                            "type": "array"
+                          },
+                          "msg": {
+                            "type": "string",
+                            "example": "string"
+                          },
+                          "type": {
+                            "type": "string",
+                            "example": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/document/{id}": {
+      "get": {
+        "summary": "Get Document",
+        "description": "",
+        "operationId": "get-document-copy",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "document_id",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          },
+          {
+            "name": "CodeGPT-Org-Id",
+            "in": "header",
+            "description": "Organization ID that agents and documents belong to.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Result": {
+                    "value": "{\n  \"id\": \"0000-0000-0000-0000\",\n  \"created_at\": \"2023-01-01T12:00:00.000Z\",\n  \"file_id\": \"0000-0000-0000-0000\",\n  \"user_id\": \"0000-0000-0000-0000\",\n  \"name\": \"La metamorfosis\",\n  \"org_id\": \"0000-0000-0000-0000\",\n  \"file_type\": \"txt\",\n  \"metadata\": {\n    \"title\": \"La metamorfosis\",\n    \"description\": \"La metamorfosis es una novela escrita por Franz Kafka y publicada en 1915.\",\n    \"summary\": \"Cuenta la historia de Gregorio Samsa, un comerciante de telas que vive con su familia a la que él mantiene con su sueldo, quien un día amanece convertido en un insecto.\",\n    \"keywords\": \"metamorfosis, insecto\",\n    \"language\": \"es\"\n  },\n  \"tokens\": 1000,\n  \"chunk_count\": 1,\n  \"content\": \"Este es el contenido del documento.\"\n}"
+                  }
+                },
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "example": "0000-0000-0000-0000"
+                    },
+                    "created_at": {
+                      "type": "string",
+                      "example": "2023-01-01T12:00:00.000Z"
+                    },
+                    "file_id": {
+                      "type": "string",
+                      "example": "0000-0000-0000-0000"
+                    },
+                    "user_id": {
+                      "type": "string",
+                      "example": "0000-0000-0000-0000"
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "La metamorfosis"
+                    },
+                    "org_id": {
+                      "type": "string",
+                      "example": "0000-0000-0000-0000"
+                    },
+                    "file_type": {
+                      "type": "string",
+                      "example": "txt"
+                    },
+                    "metadata": {
+                      "type": "object",
+                      "properties": {
+                        "title": {
+                          "type": "string",
+                          "example": "La metamorfosis"
+                        },
+                        "description": {
+                          "type": "string",
+                          "example": "La metamorfosis es una novela escrita por Franz Kafka y publicada en 1915."
+                        },
+                        "summary": {
+                          "type": "string",
+                          "example": "Cuenta la historia de Gregorio Samsa, un comerciante de telas que vive con su familia a la que él mantiene con su sueldo, quien un día amanece convertido en un insecto."
+                        },
+                        "keywords": {
+                          "type": "string",
+                          "example": "metamorfosis, insecto"
+                        },
+                        "language": {
+                          "type": "string",
+                          "example": "es"
+                        }
+                      }
+                    },
+                    "tokens": {
+                      "type": "integer",
+                      "example": 1000,
+                      "default": 0
+                    },
+                    "chunk_count": {
+                      "type": "integer",
+                      "example": 1,
+                      "default": 0
+                    },
+                    "content": {
+                      "type": "string",
+                      "example": "Este es el contenido del documento."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "400",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Result": {
+                    "value": "{}"
+                  }
+                },
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "delete": {
+        "summary": "Delete Document",
+        "description": "",
+        "operationId": "delete-document-copy",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "documentId",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          },
+          {
+            "name": "CodeGPT-Org-Id",
+            "in": "header",
+            "description": "Organization ID that agents and documents belong to.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Result": {
+                    "value": "\"string\""
+                  }
+                },
+                "schema": {
+                  "type": "string",
+                  "example": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "400",
+            "content": {
+              "text/plain": {
+                "examples": {
+                  "Result": {
+                    "value": ""
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "404",
+            "content": {
+              "text/plain": {
+                "examples": {
+                  "Result": {
+                    "value": ""
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "422",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Result": {
+                    "value": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        0\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}"
+                  }
+                },
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "detail": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "loc": {
+                            "type": "array"
+                          },
+                          "msg": {
+                            "type": "string",
+                            "example": "string"
+                          },
+                          "type": {
+                            "type": "string",
+                            "example": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/user": {
+      "patch": {
+        "summary": "Update my user data",
+        "description": "",
+        "operationId": "update-my-user-data",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "type": "string"
+                  },
+                  "full_name": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "200",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Result": {
+                    "value": "{}"
+                  }
+                },
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "400",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Result": {
+                    "value": "{}"
+                  }
+                },
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false,
+        "x-readme": {
+          "code-samples": [
+            {
+              "language": "text",
+              "code": "{\n  \"username\": \"user1\",\n  \"full_name\": \"John Doe\"\n}"
+            }
+          ],
+          "samples-languages": [
+            "text"
+          ]
+        }
+      },
+      "get": {
+        "summary": "Get my user data",
+        "description": "Create un new Agent",
+        "operationId": "me-copy",
+        "responses": {
+          "200": {
+            "description": "200",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Result": {
+                    "value": "{\n  \"name\":name ,\n  \"prompt\":prompt ,\n  \"topk\":topk \n}"
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "422",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Result": {
+                    "value": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}"
+                  }
+                },
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "detail": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "loc": {
+                            "type": "array",
+                            "items": {
+                              "type": "string",
+                              "example": "string"
+                            }
+                          },
+                          "msg": {
+                            "type": "string",
+                            "example": "string"
+                          },
+                          "type": {
+                            "type": "string",
+                            "example": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/document": {
+      "get": {
+        "summary": "List document",
+        "description": "",
+        "operationId": "list-document-copy",
+        "parameters": [
+          {
+            "name": "CodeGPT-Org-Id",
+            "in": "header",
+            "description": "Organization ID that agents and documents belong to.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Result": {
+                    "value": "[\n  {\n    \"documentId\": \"0000-0000-0000-0000\",\n    \"name\": \"Document 1\",\n    \"status\": \"published\",\n    \"istrained\": true,\n    \"content\": \"This is the content of the document...\"\n  }\n]"
+                  }
+                },
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "documentId": {
+                        "type": "string",
+                        "example": "0000-0000-0000-0000"
+                      },
+                      "name": {
+                        "type": "string",
+                        "example": "Document 1"
+                      },
+                      "status": {
+                        "type": "string",
+                        "example": "published"
+                      },
+                      "istrained": {
+                        "type": "boolean",
+                        "example": true,
+                        "default": true
+                      },
+                      "content": {
+                        "type": "string",
+                        "example": "This is the content of the document..."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "400",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Result": {
+                    "value": "{}"
+                  }
+                },
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/agent/{id}/documents": {
+      "patch": {
+        "summary": "Update Agent Documents",
+        "description": "",
+        "operationId": "update-agent-documents",
+        "parameters": [
+          {
+            "name": "CodeGPT-Org-Id",
+            "in": "header",
+            "description": "Organization ID that agents and documents belongs to",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "agent id",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "RAW_BODY": {
+                    "type": "string",
+                    "format": "json"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "200",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Result": {
+                    "value": "{}"
+                  }
+                },
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "400",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Result": {
+                    "value": "{}"
+                  }
+                },
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false,
+        "x-readme": {
+          "code-samples": [
+            {
+              "language": "text",
+              "code": "{\n  \"agent_documents\": [\n    \"0000-0000-0000-0000\"\n  ]\n}"
+            }
+          ],
+          "samples-languages": [
+            "text"
+          ]
+        }
+      }
+    },
+    "/user/avatar": {
+      "patch": {
+        "summary": "Update my user avatar",
+        "description": "",
+        "operationId": "update-my-user-avatar",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "description": "New avatar image in format jpeg/png/webp. Limit: 5MB.",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "200",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Result": {
+                    "value": "{}"
+                  }
+                },
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "400",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Result": {
+                    "value": "{}"
+                  }
+                },
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/document/{id}/metadata": {
+      "patch": {
+        "summary": "Update Document Metadata",
+        "description": "",
+        "operationId": "update-document-metadata",
+        "parameters": [
+          {
+            "name": "CodeGPT-Org-Id",
+            "in": "header",
+            "description": "Organization ID that agents and documents belong to.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string"
+                  },
+                  "summary": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "keywords": {
+                    "type": "string"
+                  },
+                  "language": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "200",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Result": {
+                    "value": "{}"
+                  }
+                },
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "400",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Result": {
+                    "value": "{}"
+                  }
+                },
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false,
+        "x-readme": {
+          "code-samples": [
+            {
+              "language": "text",
+              "code": "{\n  \"title\": \"La metamorfosis\",\n  \"description\": \"La metamorfosis es una novela escrita por Franz Kafka y publicada en 1915.\",\n  \"summary\": \"Cuenta la historia de Gregorio Samsa, un comerciante de telas que vive con su familia a la que él mantiene con su sueldo, quien un día amanece convertido en un insecto.\",\n  \"keywords\": \"metamorfosis, insecto\",\n  \"language\": \"es\"\n}"
+            }
+          ],
+          "samples-languages": [
+            "text"
+          ]
+        }
+      }
+    },
+    "/document/metadata": {
+      "post": {
+        "summary": "Get Document Metadata",
+        "description": "",
+        "operationId": "get-document-metadata",
+        "responses": {
+          "200": {
+            "description": "200",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Result": {
+                    "value": "{}"
+                  }
+                },
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "400",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Result": {
+                    "value": "{}"
+                  }
+                },
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false,
+        "x-readme": {
+          "code-samples": [
+            {
+              "language": "text",
+              "code": "{\n  \"title\": \"La metamorfosis\",\n  \"description\": \"La metamorfosis es una novela escrita por Franz Kafka y publicada en 1915.\",\n  \"summary\": \"Cuenta la historia de Gregorio Samsa, un comerciante de telas que vive con su familia a la que él mantiene con su sueldo, quien un día amanece convertido en un insecto.\",\n  \"keywords\": \"metamorfosis, insecto\",\n  \"language\": \"es\"\n}"
+            }
+          ],
+          "samples-languages": [
+            "text"
+          ]
+        }
+      }
+    }
+  },
+  "x-readme": {
+    "headers": []
+  },
+  "x-readme-fauxas": true
+}
